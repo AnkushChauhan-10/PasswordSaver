@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/appListFragment">
+
+    <fragment
+        android:id="@+id/appListFragment"
+        android:name="com.example.passwordsaver.fragment.AppListFragment"
+        android:label="fragment_app_list"
+        tools:layout="@layout/fragment_app_list" >
+        <action
+            android:id="@+id/action_appListFragment_to_insertScreenFragment"
+            app:destination="@id/insertScreenFragment" />
+        <action
+            android:id="@+id/action_appListFragment_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertScreenFragment"
+        android:name="com.example.passwordsaver.fragment.InsertScreenFragment"
+        android:label="InsertScreenFragment" >
+        <action
+            android:id="@+id/action_insertScreenFragment_to_appListFragment"
+            app:destination="@id/appListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="com.example.passwordsaver.fragment.MainScreenFragment"
+        android:label="MainScreenFragment" >
+        <action
+            android:id="@+id/action_mainScreenFragment_to_appListFragment"
+            app:destination="@id/appListFragment" />
+        <argument
+            android:name="appName"
+            app:argType="string" />
+    </fragment>
+</navigation>
