@@ -135,6 +135,7 @@ class AppListFragment : Fragment() {
         viewModel.allData.observe(viewLifecycleOwner){
             it.let {
                 adapter.upDate(it)
+                searchList.clear()
                 searchList.addAll(it)
             }
         }
