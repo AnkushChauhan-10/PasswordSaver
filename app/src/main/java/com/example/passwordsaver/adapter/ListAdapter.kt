@@ -96,4 +96,5 @@ class ListAdapter(private val context: Context): RecyclerView.Adapter<ListAdapte
         notifyDataSetChanged()
     }
 
+
 }

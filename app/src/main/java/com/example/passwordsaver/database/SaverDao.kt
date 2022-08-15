@@ -23,5 +23,4 @@ interface SaverDao {
     @Query("Select * from data_Table where app_name = :appName")
     suspend fun getData(appName: String?): SaverEntity
 
-
 }

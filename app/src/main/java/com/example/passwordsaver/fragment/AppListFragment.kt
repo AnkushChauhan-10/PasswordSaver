@@ -3,11 +3,8 @@ package com.example.passwordsaver.fragment
 import android.app.Application
 import android.icu.util.LocaleData
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.inflate
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -15,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.ButtonBarLayout
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.findFragment
@@ -39,12 +37,15 @@ import java.time.LocalDateTime
 import java.util.*
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import kotlin.collections.ArrayList
 
 class AppListFragment : Fragment() {
 
 
    // private val binding get() = _binding!!
+
    private lateinit var adapter: ListAdapter
+   private var searchList = ArrayList<SaverEntity>()
 
     private val viewModel: AllListViewModel by activityViewModels {
         AllListViewModelFactory(
@@ -63,36 +64,78 @@ class AppListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setRecycleView(view)
+        setAdapterClickListener(view)
+        setViewModelObserver()
+        search(view)
+        view.findViewById<FloatingActionButton>(R.id.add_btn).setOnClickListener {
+            navigateToInsertScreen()
+        }
+    }
 
-        var recyclerView = view.findViewById<RecyclerView>(R.id.list_item)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = ListAdapter(requireContext())
-        recyclerView.adapter = adapter
+//------------------------------------------------------------------------------------------------------------------------------
 
+    private fun setAdapterClickListener(view: View) {
         adapter.setOnclick(object : ListAdapter.ListAdapterListener{
             override fun onClickListItem(saverEntity: SaverEntity) {
                 findNavController().navigate(AppListFragmentDirections.actionAppListFragmentToMainScreenFragment(saverEntity.name))
             }
 
             override fun delete(saverEntity: SaverEntity) {
-                viewModel.delete(saverEntity)
+               deleteDialogBox(saverEntity)
             }
 
             override fun update(saverEntity: SaverEntity) {
                 setDialog(saverEntity)
             }
         })
+    }
 
+
+    private fun setRecycleView(view: View){
+        var recyclerView = view.findViewById<RecyclerView>(R.id.list_item)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        adapter = ListAdapter(requireContext())
+        recyclerView.adapter = adapter
+    }
+
+    private fun search(view: View){
+        val searchBar = view.findViewById<SearchView>(R.id.search_bar)
+        searchBar.clearFocus()
+
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filter(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+        })
+    }
+
+    private fun filter(newText: String?) {
+        val newAllList = ArrayList<SaverEntity>()
+        searchList.forEach {
+            if(it.name.toLowerCase().contains(newText!!.toLowerCase())){
+                newAllList.add(it)
+            }
+        }
+        if(newAllList.isEmpty()){
+
+        }else{
+            adapter.upDate(newAllList)
+        }
+    }
+
+    private fun setViewModelObserver(){
         viewModel.allData.observe(viewLifecycleOwner){
             it.let {
                 adapter.upDate(it)
+                searchList.addAll(it)
             }
         }
-
-        view.findViewById<FloatingActionButton>(R.id.add_btn).setOnClickListener {
-           navigateToInsertScreen()
-        }
-
     }
 
     private fun navigateToInsertScreen(){
@@ -131,6 +174,22 @@ class AppListFragment : Fragment() {
             builder.dismiss()
         }
         builder.show()
+    }
+
+    private fun deleteDialogBox(saverEntity: SaverEntity){
+        var alertDialog =  AlertDialog.Builder(ContextThemeWrapper(requireContext(),R.style.AlertDialog))
+        alertDialog.setTitle("Confirm Delete...!!")
+        alertDialog.setIcon(R.drawable.ic_baseline_delete_forever_24)
+        alertDialog.setMessage("Are you sure,you want to delete")
+        alertDialog.setCancelable(false)
+        alertDialog.setPositiveButton("yes"){_,_ ->
+            viewModel.delete(saverEntity)
+            findNavController().navigate(MainScreenFragmentDirections.actionMainScreenFragmentToAppListFragment())
+        }
+        alertDialog.setNegativeButton("Cancel"){_,_ ->
+
+        }
+        alertDialog.show()
     }
 
     fun getCurrentDateTime(): String{

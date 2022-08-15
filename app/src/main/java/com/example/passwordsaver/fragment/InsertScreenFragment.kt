@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -40,12 +41,23 @@ class InsertScreenFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        onSave(view)
+        onCancel(view)
+
+    }
+
+    private fun onCancel(view: View) {
+        view.findViewById<Button>(R.id.cancel).setOnClickListener {
+            findNavController().navigate(InsertScreenFragmentDirections.actionInsertScreenFragmentToAppListFragment())
+        }
+    }
+
+    private fun onSave(view: View) {
         view.findViewById<MaterialButton>(R.id.save_button).setOnClickListener{
             addData(view.findViewById<TextInputEditText>(R.id.appName_editText).text.toString(),
                 view.findViewById<TextInputEditText>(R.id.userName_editText).text.toString(),
                 view.findViewById<TextInputEditText>(R.id.password_editText).text.toString())
         }
-
     }
 
     fun addData(app:String,user:String, password:String){

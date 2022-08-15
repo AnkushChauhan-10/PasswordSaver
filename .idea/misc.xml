@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/button_shape.xml" value="0.1645" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/dialog_shape.xml" value="0.1645" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/inner_input_background.xml" value="0.1645" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/input_shape.xml" value="0.1645" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/insert_background.xml" value="0.1645" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/list_shape.xml" value="0.1645" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/layout/activity_main.xml" value="0.20625" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/layout/add_dialog.xml" value="0.258433734939759" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/layout/fragment_app_list.xml" value="0.2234375" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/layout/fragment_insert_screen.xml" value="0.264" />
-        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/layout/fragment_main_screen.xml" value="0.1" />
-        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/layout/recycle_list.xml" value="0.1" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/layout/fragment_main_screen.xml" value="0.264" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/layout/recycle_list.xml" value="0.2" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/menu/menu.xml" value="0.2234375" />
       </map>
     </option>
