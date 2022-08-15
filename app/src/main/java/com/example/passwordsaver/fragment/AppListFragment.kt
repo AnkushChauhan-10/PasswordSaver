@@ -18,6 +18,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passwordsaver.DatabaseApplication
@@ -68,6 +69,7 @@ class AppListFragment : Fragment() {
         setAdapterClickListener(view)
         setViewModelObserver()
         search(view)
+
         view.findViewById<FloatingActionButton>(R.id.add_btn).setOnClickListener {
             navigateToInsertScreen()
         }
@@ -160,6 +162,8 @@ class AppListFragment : Fragment() {
         val saveButton = view.findViewById<Button>(R.id.save)
         val cancelButton = view.findViewById<Button>(R.id.cancel)
         saveButton.setOnClickListener {
+            if(userID.text.toString().trim().isNotEmpty() && password.text.toString().trim().isNotEmpty()
+                &&( !userID.text.toString().equals(saverEntity.userName) || !password.text.toString().equals(saverEntity.password)) ) {
                 viewModel.update(
                     SaverEntity(
                         saverEntity.name,
@@ -169,6 +173,7 @@ class AppListFragment : Fragment() {
                     )
                 )
                 builder.dismiss()
+            }
         }
         cancelButton.setOnClickListener {
             builder.dismiss()
@@ -184,7 +189,7 @@ class AppListFragment : Fragment() {
         alertDialog.setCancelable(false)
         alertDialog.setPositiveButton("yes"){_,_ ->
             viewModel.delete(saverEntity)
-            findNavController().navigate(MainScreenFragmentDirections.actionMainScreenFragmentToAppListFragment())
+            Toast.makeText(requireContext(),"Deleted",Toast.LENGTH_SHORT).show()
         }
         alertDialog.setNegativeButton("Cancel"){_,_ ->
 

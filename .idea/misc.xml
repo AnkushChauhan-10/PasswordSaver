@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/button_shape.xml" value="0.1645" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/copy_background.xml" value="0.1645" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/dialog_shape.xml" value="0.1645" />
+        <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1645" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/inner_input_background.xml" value="0.1645" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/input_shape.xml" value="0.1645" />
         <entry key="..\:/Projects/Android/PasswordSaver/app/src/main/res/drawable/insert_background.xml" value="0.1645" />
