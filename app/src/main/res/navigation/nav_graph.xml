@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/appListFragment">
+    app:startDestination="@id/patternScreenFragment">
 
     <fragment
         android:id="@+id/appListFragment"
@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_appListFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment" />
+        <action
+            android:id="@+id/action_appListFragment_to_setPatternFragment"
+            app:destination="@id/setPatternFragment" />
     </fragment>
     <fragment
         android:id="@+id/insertScreenFragment"
@@ -23,7 +26,9 @@
         android:label="InsertScreenFragment" >
         <action
             android:id="@+id/action_insertScreenFragment_to_appListFragment"
-            app:destination="@id/appListFragment" />
+            app:destination="@id/appListFragment"
+            app:popUpTo="@id/insertScreenFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -31,9 +36,31 @@
         android:label="MainScreenFragment" >
         <action
             android:id="@+id/action_mainScreenFragment_to_appListFragment"
-            app:destination="@id/appListFragment" />
+            app:destination="@id/appListFragment"
+            app:popUpTo="@id/mainScreenFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="appName"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/patternScreenFragment"
+        android:name="com.example.passwordsaver.fragment.PatternScreenFragment"
+        android:label="PatternScreenFragment" >
+        <action
+            android:id="@+id/action_patternScreenFragment_to_appListFragment"
+            app:destination="@id/appListFragment"
+            app:popUpTo="@id/patternScreenFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/setPatternFragment"
+        android:name="com.example.passwordsaver.fragment.SetPatternFragment"
+        android:label="SetPatternFragment" >
+        <action
+            android:id="@+id/action_setPatternFragment_to_appListFragment"
+            app:destination="@id/appListFragment"
+            app:popUpTo="@id/setPatternFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

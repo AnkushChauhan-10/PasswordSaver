@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:textSize="30dp"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:drawableLeft="@drawable/ic_baseline_lock_black"
                 android:textColor="@color/black"
                 android:padding="10dp"
                 android:inputType="textPersonName"

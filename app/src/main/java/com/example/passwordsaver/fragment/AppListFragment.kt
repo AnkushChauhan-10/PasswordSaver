@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.ButtonBarLayout
@@ -54,6 +55,8 @@ class AppListFragment : Fragment() {
         )
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,6 +75,9 @@ class AppListFragment : Fragment() {
 
         view.findViewById<FloatingActionButton>(R.id.add_btn).setOnClickListener {
             navigateToInsertScreen()
+        }
+        view.findViewById<ImageButton>(R.id.listButton).setOnClickListener {
+            findNavController().navigate(AppListFragmentDirections.actionAppListFragmentToSetPatternFragment())
         }
     }
 
@@ -204,6 +210,8 @@ class AppListFragment : Fragment() {
         val dateTime = simpleDateFormat.format(calendar.time).toString()
         return dateTime
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
 
 }
